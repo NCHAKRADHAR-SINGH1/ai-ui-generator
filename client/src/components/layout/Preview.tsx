@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as Babel from '@babel/standalone';
 import * as Components from '../ui/index';
 
 interface PreviewProps {
@@ -88,3 +89,4 @@ export const Preview: React.FC<PreviewProps> = ({ code, onError }) => {
     </div>
   );
 };;
+
