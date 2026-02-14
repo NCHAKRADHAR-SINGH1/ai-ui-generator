@@ -15,10 +15,18 @@ export const Preview: React.FC<PreviewProps> = ({ code, onError }) => {
     try {
       console.log('🔍 RAW CODE:', code);
       
-      // Pass ALL React hooks and components
+      // Step 1: Transpile JSX to JavaScript using Babel
+      const transpiled = Babel.transform(code, {
+        presets: ['react'],
+        filename: 'dynamic.tsx'
+      }).code;
+      
+      console.log('✨ TRANSPILED CODE:', transpiled);
+      
+      // Step 2: Create function from transpiled code
       const functionBody = `
         // Return the component function
-        return ${code};
+        return ${transpiled};
       `;
 
       const fn = new Function(
@@ -88,5 +96,4 @@ export const Preview: React.FC<PreviewProps> = ({ code, onError }) => {
       </div>
     </div>
   );
-};;
-
+};
