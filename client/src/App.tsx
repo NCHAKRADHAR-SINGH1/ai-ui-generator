@@ -8,35 +8,35 @@ import { useCodeGeneration } from './hooks/useCodeGeneration';
 
 function App() {
   const [currentCode, setCurrentCode] = useState<string>(`function GeneratedUI() {
-  return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <Card title="🎨 AI UI Generator" variant="bordered">
-        <div className="space-y-4">
-          <p className="text-gray-600">
-            Describe what you want to build in the left panel. For example:
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <Card variant="minimal">
-              <p className="font-medium">"Create a login form"</p>
-            </Card>
-            <Card variant="minimal">
-              <p className="font-medium">"Make a sales dashboard"</p>
-            </Card>
-            <Card variant="minimal">
-              <p className="font-medium">"Show me a user table"</p>
-            </Card>
-            <Card variant="minimal">
-              <p className="font-medium">"Add a settings modal"</p>
-            </Card>
+    return (
+      <div className="p-8 max-w-4xl mx-auto">
+        <Card title="🎨 AI UI Generator" variant="bordered">
+          <div className="space-y-4">
+            <p className="text-gray-600">
+              Describe what you want to build in the left panel. For example:
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <Card variant="minimal">
+                <p className="font-medium">"Create a login form"</p>
+              </Card>
+              <Card variant="minimal">
+                <p className="font-medium">"Make a sales dashboard"</p>
+              </Card>
+              <Card variant="minimal">
+                <p className="font-medium">"Show me a user table"</p>
+              </Card>
+              <Card variant="minimal">
+                <p className="font-medium">"Add a settings modal"</p>
+              </Card>
+            </div>
+            <Button variant="primary" className="mt-4">
+              Get Started
+            </Button>
           </div>
-          <Button variant="primary" className="mt-4">
-            Get Started
-          </Button>
-        </div>
-      </Card>
-    </div>
-  );
-}`);
+        </Card>
+      </div>
+    );
+  }`);
   
   const [currentIntent, setCurrentIntent] = useState('');
   const [explanation, setExplanation] = useState('');
