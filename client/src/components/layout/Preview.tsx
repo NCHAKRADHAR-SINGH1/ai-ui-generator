@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import * as Babel from '@babel/standalone';
 import * as Components from '../ui/index';
 
 interface PreviewProps {
@@ -15,28 +14,30 @@ export const Preview: React.FC<PreviewProps> = ({ code, onError }) => {
     try {
       console.log('🔍 RAW CODE:', code);
       
-      // Step 1: Transpile JSX to JavaScript using Babel
-      const transpiled = Babel.transform(code, {
-        presets: ['react'],
-        filename: 'dynamic.tsx'
-      }).code;
-      
-      console.log('✨ TRANSPILED CODE:', transpiled);
-      
-      // Step 2: Create function from transpiled code
+      // Pass ALL React hooks and components
       const functionBody = `
         // Return the component function
-        return ${transpiled};
+        return ${code};
       `;
 
       const fn = new Function(
         'React',
+        'useState',
+        'useEffect',
+        'useMemo',
+        'useCallback',
+        'useRef',
         ...Object.keys(Components),
         functionBody
       );
 
       const GeneratedComponent = fn(
         React,
+        React.useState,
+        React.useEffect,
+        React.useMemo,
+        React.useCallback,
+        React.useRef,
         ...Object.values(Components)
       );
 
@@ -62,9 +63,7 @@ export const Preview: React.FC<PreviewProps> = ({ code, onError }) => {
             {error}
           </pre>
           <p className="text-sm text-gray-600 mt-2">
-            {error.includes('Unexpected token') 
-              ? 'JSX transpilation failed. Make sure your code has proper function wrapper.'
-              : 'Make sure you\'re using only: Button, Card, Input, Table, Modal, Sidebar, Navbar, Chart'}
+            Make sure you're using only: Button, Card, Input, Table, Modal, Sidebar, Navbar, Chart
           </p>
         </div>
       </div>
@@ -88,4 +87,4 @@ export const Preview: React.FC<PreviewProps> = ({ code, onError }) => {
       </div>
     </div>
   );
-};
+};;
